@@ -8,37 +8,17 @@
   <title>Study Videos</title>
 
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #37352f;
-      --button: #f1f1ef;
-      --button-hover: #e9e9e7;
-      --active: #37352f;
-      --active-text: #ffffff;
-      --border: rgba(55, 53, 47, 0.10);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #191919;
-        --text: #d4d4d4;
-        --button: #2f2f2f;
-        --button-hover: #3a3a3a;
-        --active: #ffffff;
-        --active-text: #191919;
-        --border: rgba(255, 255, 255, 0.10);
-      }
-    }
-
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
-      padding: 8px;
-      background: transparent;
-      color: var(--text);
+      padding: 0;
+      width: 100%;
+      background: #000000;
+      color: #ffffff;
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -48,28 +28,34 @@
         sans-serif;
     }
 
-    .container {
-      width: 100%;
+    body {
+      padding: 10px;
     }
 
-    /* BUTTON GRID */
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    /* 4 BUTTONS */
 
     .buttons {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
       margin-bottom: 10px;
     }
 
     button {
-      appearance: none;
-      border: 1px solid var(--border);
-      border-radius: 7px;
+      width: 100%;
+      border: 1px solid #2f2f2f;
+      border-radius: 8px;
 
-      background: var(--button);
-      color: var(--text);
+      padding: 11px 10px;
 
-      padding: 9px 8px;
+      background: #1f1f1f;
+      color: #d4d4d4;
 
       font-size: 13px;
       font-weight: 500;
@@ -78,58 +64,61 @@
 
       transition:
         background 0.15s ease,
-        transform 0.08s ease,
-        opacity 0.15s ease;
+        color 0.15s ease,
+        transform 0.08s ease;
     }
 
     button:hover {
-      background: var(--button-hover);
+      background: #2a2a2a;
+      color: #ffffff;
     }
 
     button:active {
-      transform: scale(0.97);
+      transform: scale(0.98);
     }
 
     button.active {
-      background: var(--active);
-      color: var(--active-text);
-      border-color: var(--active);
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
     }
 
     /* VIDEO */
 
     .video-wrapper {
+      position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
 
       overflow: hidden;
 
       border-radius: 10px;
-      border: 1px solid var(--border);
+      background: #000000;
 
-      background: #000;
-
-      box-shadow:
-        0 1px 2px rgba(0,0,0,0.05);
+      border: 1px solid #242424;
     }
 
     iframe {
+      position: absolute;
+
       width: 100%;
       height: 100%;
 
+      left: 0;
+      top: 0;
+
       border: none;
-      display: block;
     }
 
-    /* SMALL SCREENS */
+    /* MOBILE */
 
     @media (max-width: 500px) {
       .buttons {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
       }
 
-      button {
-        padding: 10px 6px;
+      body {
+        padding: 6px;
       }
     }
   </style>
@@ -162,16 +151,6 @@
         ▶ Study 4
       </button>
 
-      <button
-        onclick="changeVideo('', this)">
-        ＋ Study 5
-      </button>
-
-      <button
-        onclick="changeVideo('', this)">
-        ＋ Study 6
-      </button>
-
     </div>
 
     <div class="video-wrapper">
@@ -201,12 +180,6 @@
 
     function changeVideo(videoId, button) {
 
-      // Ignore empty buttons
-      if (!videoId) {
-        return;
-      }
-
-      // Change video
       const player =
         document.getElementById("youtubePlayer");
 
@@ -215,14 +188,12 @@
         videoId +
         "?autoplay=1";
 
-      // Remove active state
       document
         .querySelectorAll("button")
         .forEach(btn => {
           btn.classList.remove("active");
         });
 
-      // Activate clicked button
       button.classList.add("active");
     }
 
@@ -230,4 +201,4 @@
 
 </body>
 </html>
-```
+
