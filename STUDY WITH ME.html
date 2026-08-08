@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Study Videos</title>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #37352f;
+      --button: #f1f1ef;
+      --button-hover: #e9e9e7;
+      --active: #37352f;
+      --active-text: #ffffff;
+      --border: rgba(55, 53, 47, 0.10);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #191919;
+        --text: #d4d4d4;
+        --button: #2f2f2f;
+        --button-hover: #3a3a3a;
+        --active: #ffffff;
+        --active-text: #191919;
+        --border: rgba(255, 255, 255, 0.10);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 8px;
+      background: transparent;
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Helvetica,
+        Arial,
+        sans-serif;
+    }
+
+    .container {
+      width: 100%;
+    }
+
+    /* BUTTON GRID */
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      background: var(--button);
+      color: var(--text);
+
+      padding: 9px 8px;
+
+      font-size: 13px;
+      font-weight: 500;
+
+      cursor: pointer;
+
+      transition:
+        background 0.15s ease,
+        transform 0.08s ease,
+        opacity 0.15s ease;
+    }
+
+    button:hover {
+      background: var(--button-hover);
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    button.active {
+      background: var(--active);
+      color: var(--active-text);
+      border-color: var(--active);
+    }
+
+    /* VIDEO */
+
+    .video-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+
+      overflow: hidden;
+
+      border-radius: 10px;
+      border: 1px solid var(--border);
+
+      background: #000;
+
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+
+      border: none;
+      display: block;
+    }
+
+    /* SMALL SCREENS */
+
+    @media (max-width: 500px) {
+      .buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      button {
+        padding: 10px 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="buttons">
+
+      <button
+        class="active"
+        onclick="changeVideo('m2DVoPrVF9U', this)">
+        ▶ Study 1
+      </button>
+
+      <button
+        onclick="changeVideo('Qo7N-HbEMxE', this)">
+        ▶ Study 2
+      </button>
+
+      <button
+        onclick="changeVideo('g6QSU_hr70s', this)">
+        ▶ Study 3
+      </button>
+
+      <button
+        onclick="changeVideo('p3ynjjRbU9A', this)">
+        ▶ Study 4
+      </button>
+
+      <button
+        onclick="changeVideo('', this)">
+        ＋ Study 5
+      </button>
+
+      <button
+        onclick="changeVideo('', this)">
+        ＋ Study 6
+      </button>
+
+    </div>
+
+    <div class="video-wrapper">
+
+      <iframe
+        id="youtubePlayer"
+        src="https://www.youtube.com/embed/m2DVoPrVF9U"
+        title="Study Video"
+        allow="
+          accelerometer;
+          autoplay;
+          clipboard-write;
+          encrypted-media;
+          gyroscope;
+          picture-in-picture;
+          web-share
+        "
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function changeVideo(videoId, button) {
+
+      // Ignore empty buttons
+      if (!videoId) {
+        return;
+      }
+
+      // Change video
+      const player =
+        document.getElementById("youtubePlayer");
+
+      player.src =
+        "https://www.youtube.com/embed/" +
+        videoId +
+        "?autoplay=1";
+
+      // Remove active state
+      document
+        .querySelectorAll("button")
+        .forEach(btn => {
+          btn.classList.remove("active");
+        });
+
+      // Activate clicked button
+      button.classList.add("active");
+    }
+
+  </script>
+
+</body>
+</html>
+```
